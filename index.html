@@ -83,6 +83,7 @@
         canvas.style.height = "100%";
     }
 
+    
     loadingBar.style.display = "block";
 
     var gameInstance = null;
@@ -117,34 +118,10 @@
         if (selectedFile != null) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                var image = new Image();
-                image.src = e.target.result;
-                image.onload = function () {
-                    sendMessageToUnity(image.src);
-                };
+                    sendMessageToUnity(URL.createObjectURL(selectedFile));
             };
             reader.readAsDataURL(selectedFile)
         }
-    }
-
-    function downloadImage(base64) {
-        var windowURL = window.URL || window.webkitURL;
-
-        console.log(bytes.size);
-        var blob = new Blob([bytes], {type: "image/jpeg"});
-        console.log(blob.size);
-
-        var downloadLink = document.createElement("downloadLink");
-        downloadLink.href = windowURL.createObjectURL(blob);
-        downloadLink.download = "123.jpg";
-        downloadLink.style.display = "none";
-        document.body.removeChild(downloadLink);
-        document.body(downloadLink);
-
-        downloadLink.click();
-
-        windowURL.revokeObjectURL(downloadLink);
-
     }
 
 </script>
