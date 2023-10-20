@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>新冠戰士</title>
+    <title>PhotoDemo</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
 </head>
@@ -16,8 +16,8 @@
             <div id="unity-progress-bar-full"></div>
         </div>
     </div>
-    <input type="file" id="files" style="display: none" accept="image/*" onchange="fileImport()">
     <div id="unity-warning"></div>
+    <input type="file" id="files" style="display: none" accept="image/*" onchange="fileImport()">
 </div>
 <script>
 
@@ -125,6 +125,26 @@
             };
             reader.readAsDataURL(selectedFile)
         }
+    }
+
+    function downloadImage(base64) {
+        var windowURL = window.URL || window.webkitURL;
+
+        console.log(bytes.size);
+        var blob = new Blob([bytes], {type: "image/jpeg"});
+        console.log(blob.size);
+
+        var downloadLink = document.createElement("downloadLink");
+        downloadLink.href = windowURL.createObjectURL(blob);
+        downloadLink.download = "123.jpg";
+        downloadLink.style.display = "none";
+        document.body.removeChild(downloadLink);
+        document.body(downloadLink);
+
+        downloadLink.click();
+
+        windowURL.revokeObjectURL(downloadLink);
+
     }
 
 </script>
