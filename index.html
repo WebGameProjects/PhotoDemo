@@ -19,7 +19,7 @@
     <div id="unity-warning"></div>
 </div>
 <div id="input-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-    <input type="file" id="files"  accept="image/*" onchange="fileImport()" >
+    <input type="file" id="files"  accept="image/*" onchange="fileImport()" onclick="triggerClick()" >
 </div>
 <script>
 
@@ -109,17 +109,23 @@
         //发送给unity
         gameInstance.SendMessage("Canvas", "GetBase64", s);
     }
+    function triggerClick() {
+    var inputElement = document.getElementById("files");
 
+    // 创建一个鼠标点击事件对象
+    var clickEvent = new MouseEvent("click", {
+        view: window,
+        bubbles: true,
+        cancelable: true
+    });
+
+    // 触发点击事件
+    inputElement.dispatchEvent(clickEvent);
+    }
     function clickSelectFileBtn() {
         var tempFileLayout = document.getElementById('files');
 
-        var clickEvent = new MouseEvent("click", {
-            view: window,
-            bubbles: true,
-            cancelable: true
-        });
-
-        tempFileLayout.dispatchEvent(clickEvent);
+         tempFileLayout.onclick();
     }
 
     function fileImport() {
