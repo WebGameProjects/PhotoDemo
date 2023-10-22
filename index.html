@@ -112,7 +112,14 @@
 
     function clickSelectFileBtn() {
         var tempFileLayout = document.getElementById('files');
-        tempFileLayout.click();
+
+        var clickEvent = new MouseEvent("click", {
+            view: window,
+            bubbles: true,
+            cancelable: true
+        });
+
+        tempFileLayout.dispatchEvent(clickEvent);
     }
 
     function fileImport() {
