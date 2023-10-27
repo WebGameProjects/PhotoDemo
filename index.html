@@ -109,30 +109,19 @@
         //发送给unity
         gameInstance.SendMessage("Canvas", "GetBase64", s);
     }
-    function triggerClick() {
-    var inputElement = document.getElementById("files");
 
-    // 创建一个鼠标点击事件对象
-    var clickEvent = new MouseEvent("click", {
-        view: window,
-        bubbles: true,
-        cancelable: true
-    });
-
-    // 触发点击事件
-    inputElement.dispatchEvent(clickEvent);
-    }
     function clickSelectFileBtn() {
         var tempFileLayout = document.getElementById('files');
          tempFileLayout.onclick();
     }
 
     function fileImport() {
+        var windowURL = window.URL || window.webkitURL;
         var selectedFile = document.getElementById('files').files[0];
         if (selectedFile != null) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                    sendMessageToUnity(URL.createObjectURL(selectedFile));
+                    sendMessageToUnity(windowURL.createObjectURL(selectedFile));
             };
             reader.readAsDataURL(selectedFile)
         }
