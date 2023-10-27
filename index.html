@@ -19,7 +19,7 @@
     <div id="unity-warning"></div>
 </div>
 <div id="input-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-    <input type="file" id="files"  accept="image/*" onchange="fileImport()" onclick="triggerClick()" >
+    <input type="file" id="files"  accept="image/*" onchange="fileImport()" >
 </div>
 <script>
 
@@ -124,7 +124,6 @@
     }
     function clickSelectFileBtn() {
         var tempFileLayout = document.getElementById('files');
-
          tempFileLayout.onclick();
     }
 
