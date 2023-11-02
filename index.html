@@ -18,9 +18,7 @@
     </div>
     <div id="unity-warning"></div>
 </div>
-<div id="input-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-    <input type="file" id="files"  accept="image/*" onchange="fileImport()" >
-</div>
+<input type="file" id="files" accept="image/*" onchange="fileImport()">
 <script>
 
 
@@ -63,9 +61,9 @@
         codeUrl: buildUrl + "/PhotoDemo.wasm.unityweb?id=0.0.1",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "penpeer",
-    productName: "CompositePhoto",
-    productVersion: "0.0.1",
-    showBanner: unityShowBanner,
+        productName: "CompositePhoto",
+        productVersion: "0.0.1",
+        showBanner: unityShowBanner,
     };
 
     // By default Unity keeps WebGL canvas render target size matched with
@@ -112,11 +110,8 @@
 
     function clickSelectFileBtn() {
         var tempFileLayout = document.getElementById('files');
-<<<<<<< Updated upstream
-         tempFileLayout.onclick();
-=======
+
         return tempFileLayout.click();
->>>>>>> Stashed changes
     }
 
     function fileImport() {
@@ -125,11 +120,7 @@
         if (selectedFile != null) {
             var reader = new FileReader();
             reader.onload = function (e) {
-<<<<<<< Updated upstream
-                    sendMessageToUnity(windowURL.createObjectURL(selectedFile));
-=======
                 sendMessageToUnity(windowURL.createObjectURL(selectedFile));
->>>>>>> Stashed changes
             };
             reader.readAsDataURL(selectedFile)
         }
