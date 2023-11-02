@@ -56,16 +56,16 @@
     }
 
     var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/AZ_PhotoWeb.loader.js?id=0.0.1";
+    var loaderUrl = buildUrl + "/PhotoDemo.loader.js?id=0.0.1";
     var config = {
-        dataUrl: buildUrl + "/AZ_PhotoWeb.data.unityweb?id=0.0.1",
-        frameworkUrl: buildUrl + "/AZ_PhotoWeb.framework.js.unityweb?id=0.0.1",
-        codeUrl: buildUrl + "/AZ_PhotoWeb.wasm.unityweb?id=0.0.1",
+        dataUrl: buildUrl + "/PhotoDemo.data.unityweb?id=0.0.1",
+        frameworkUrl: buildUrl + "/PhotoDemo.framework.js.unityweb?id=0.0.1",
+        codeUrl: buildUrl + "/PhotoDemo.wasm.unityweb?id=0.0.1",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "AZ-Photo",
-        productVersion: "0.0.1",
-        showBanner: unityShowBanner,
+        companyName: "penpeer",
+    productName: "CompositePhoto",
+    productVersion: "0.0.1",
+    showBanner: unityShowBanner,
     };
 
     // By default Unity keeps WebGL canvas render target size matched with
@@ -85,7 +85,7 @@
         canvas.style.height = "100%";
     }
 
-    
+
     loadingBar.style.display = "block";
 
     var gameInstance = null;
@@ -112,7 +112,11 @@
 
     function clickSelectFileBtn() {
         var tempFileLayout = document.getElementById('files');
+<<<<<<< Updated upstream
          tempFileLayout.onclick();
+=======
+        return tempFileLayout.click();
+>>>>>>> Stashed changes
     }
 
     function fileImport() {
@@ -121,7 +125,11 @@
         if (selectedFile != null) {
             var reader = new FileReader();
             reader.onload = function (e) {
+<<<<<<< Updated upstream
                     sendMessageToUnity(windowURL.createObjectURL(selectedFile));
+=======
+                sendMessageToUnity(windowURL.createObjectURL(selectedFile));
+>>>>>>> Stashed changes
             };
             reader.readAsDataURL(selectedFile)
         }
