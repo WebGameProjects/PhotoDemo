@@ -17,8 +17,9 @@
         </div>
     </div>
     <div id="unity-warning"></div>
+    <a id="input" href="javascript:void(0);" onclick="document.getElementById('files').click();"></a>
+    <input type="file" id="files" style="display: none" accept="image/*" onchange="FileImport()">
 </div>
-<input type="file" id="files" accept="image/*" onchange="fileImport()">
 <script>
 
 
@@ -53,9 +54,9 @@
         updateBannerVisibility();
     }
 
-    var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/PhotoDemo.loader.js?id=0.0.1";
-    var config = {
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/PhotoDemo.loader.js?id=0.0.1";
+      var config = {
         dataUrl: buildUrl + "/PhotoDemo.data.unityweb?id=0.0.1",
         frameworkUrl: buildUrl + "/PhotoDemo.framework.js.unityweb?id=0.0.1",
         codeUrl: buildUrl + "/PhotoDemo.wasm.unityweb?id=0.0.1",
@@ -64,8 +65,10 @@
         productName: "CompositePhoto",
         productVersion: "0.0.1",
         showBanner: unityShowBanner,
-    };
+      };
 
+    window.addEventListener('load', ResizeCanvasToMaintainAspectRatio);
+    window.addEventListener('resize', ResizeCanvasToMaintainAspectRatio);
     // By default Unity keeps WebGL canvas render target size matched with
     // the DOM size of the canvas element (scaled by window.devicePixelRatio)
     // Set this to false if you want to decouple this synchronization from
@@ -88,7 +91,7 @@
 
     var gameInstance = null;
 
-    var script = document.createElement("script");
+    const script = document.createElement("script");
     script.src = loaderUrl;
     script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
@@ -103,29 +106,55 @@
     document.body.appendChild(script);
 
 
-    function sendMessageToUnity(s) {
-        //发送给unity
-        gameInstance.SendMessage("Canvas", "GetBase64", s);
+    function SendMessageToUnity(s) {
+        gameInstance.SendMessage("CompositeImagePresenter", "GetImageData", s);
     }
 
-    function clickSelectFileBtn() {
-        var tempFileLayout = document.getElementById('files');
+    function ClickSelectFileBtn() {
+        const tempFileLayout = document.getElementById('input');
 
         return tempFileLayout.click();
     }
 
-    function fileImport() {
-        var windowURL = window.URL || window.webkitURL;
-        var selectedFile = document.getElementById('files').files[0];
+    function FileImport() {
+        const windowURL = window.URL || window.webkitURL;
+        const selectedFile = document.getElementById('files').files[0];
         if (selectedFile != null) {
-            var reader = new FileReader();
+            const reader = new FileReader();
+
             reader.onload = function (e) {
-                sendMessageToUnity(windowURL.createObjectURL(selectedFile));
+                const img = new Image();
+                img.src = windowURL.createObjectURL(selectedFile);
+
+                img.onload = function (e) {
+                    const width = img.width;
+                    const height = img.height;
+
+                    var data = {
+                        ImageUrl: img.src,
+                        Width: width,
+                        Height: height
+                    };
+
+                    SendMessageToUnity(JSON.stringify(data));
+
+                };
             };
             reader.readAsDataURL(selectedFile)
         }
     }
 
+
+    function ResizeCanvasToMaintainAspectRatio() {
+        const canvas = document.getElementById('unity-canvas');
+
+        const newHeight = window.innerHeight;
+
+        const newWidth = (9 / 16) * newHeight;
+
+        canvas.style.width = newWidth   +'px';
+        canvas.style.height = newHeight +'px';
+    }
 </script>
 </body>
 </html>
