@@ -6,6 +6,8 @@
     <title>PhotoDemo</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+    <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="unity-container">
@@ -17,8 +19,9 @@
         </div>
     </div>
     <div id="unity-warning"></div>
-    <a id="input" href="javascript:void(0);" onclick="document.getElementById('files').click();"></a>
-    <input type="file" id="files" style="display: none" accept="image/*" onchange="FileImport()">
+    <a id="input" href="javascript:void(0);" onclick="document.getElementById('files').focus();document.getElementById('files').click();">
+        <input type="file" id="files" class="dropzone" style="display: none" accept="image/*" onchange="FileImport()">
+    </a>
 </div>
 <script>
 
