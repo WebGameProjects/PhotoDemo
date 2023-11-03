@@ -17,7 +17,6 @@
         </div>
     </div>
     <div id="unity-warning"></div>
-    <a id="input" href="javascript:void(0);" onclick="document.getElementById('files').click();"></a>
     <input type="file" id="files" style="display: none" accept="image/*" onchange="FileImport()">
 </div>
 <script>
@@ -55,15 +54,15 @@
     }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/PhotoDemo.loader.js?id=0.0.1";
+      var loaderUrl = buildUrl + "/PhotoDemo.loader.js?id=0.0.2";
       var config = {
-        dataUrl: buildUrl + "/PhotoDemo.data.unityweb?id=0.0.1",
-        frameworkUrl: buildUrl + "/PhotoDemo.framework.js.unityweb?id=0.0.1",
-        codeUrl: buildUrl + "/PhotoDemo.wasm.unityweb?id=0.0.1",
+        dataUrl: buildUrl + "/PhotoDemo.data.unityweb?id=0.0.2",
+        frameworkUrl: buildUrl + "/PhotoDemo.framework.js.unityweb?id=0.0.2",
+        codeUrl: buildUrl + "/PhotoDemo.wasm.unityweb?id=0.0.2",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "penpeer",
         productName: "CompositePhoto",
-        productVersion: "0.0.1",
+        productVersion: "0.0.2",
         showBanner: unityShowBanner,
       };
 
@@ -111,7 +110,11 @@
     }
 
     function ClickSelectFileBtn() {
-        const tempFileLayout = document.getElementById('input');
+        const tempFileLayout = document.getElementById('files');
+
+        tempFileLayout.addEventListener('touchstart', function () {
+            console.log("FileBtn");
+        });
 
         return tempFileLayout.click();
     }
