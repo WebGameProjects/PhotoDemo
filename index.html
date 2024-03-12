@@ -118,9 +118,15 @@
     }
 
     function ClickSelectFileBtn() {
-        const tempFileLayout = document.getElementById('input');
-
-        return tempFileLayout.click();
+      if (navigator.share) {
+  navigator.share({
+    title: '標題',
+    text: '文字描述',
+    url: 'https://shubo.io/',
+  })
+    .then(() => console.log('成功！'))
+    .catch((error) => console.log('發生錯誤', error));
+}
     }
 
     function FileImport() {
