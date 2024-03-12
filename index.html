@@ -3,11 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
     <title>PhotoDemo</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
-    <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="unity-container">
@@ -19,10 +18,7 @@
         </div>
     </div>
     <div id="unity-warning"></div>
-    <a id="input" href="javascript:void(0);"
-       onclick="document.getElementById('files').focus();document.getElementById('files').click();">
-        <input type="file" id="files" class="dropzone" style="display: none;cursor:pointer;" accept="image/*" onchange="FileImport()">
-    </a>
+    <input type="file" id="files" style="display: none" accept="image/*" onchange="FileImport()">
 </div>
 <script>
 
@@ -58,22 +54,21 @@
         updateBannerVisibility();
     }
 
-    var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/PhotoDemo.loader.js?id=0.0.1";
-    var config = {
-        dataUrl: buildUrl + "/PhotoDemo.data.unityweb?id=0.0.1",
-        frameworkUrl: buildUrl + "/PhotoDemo.framework.js.unityweb?id=0.0.1",
-        codeUrl: buildUrl + "/PhotoDemo.wasm.unityweb?id=0.0.1",
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/PhotoDemo.loader.js?id=0.0.3";
+      var config = {
+        dataUrl: buildUrl + "/PhotoDemo.data.unityweb?id=0.0.3",
+        frameworkUrl: buildUrl + "/PhotoDemo.framework.js.unityweb?id=0.0.3",
+        codeUrl: buildUrl + "/PhotoDemo.wasm.unityweb?id=0.0.3",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "penpeer",
         productName: "CompositePhoto",
-        productVersion: "0.0.1",
+        productVersion: "0.0.3",
         showBanner: unityShowBanner,
-    };
+      };
 
     window.addEventListener('load', ResizeCanvasToMaintainAspectRatio);
     window.addEventListener('resize', ResizeCanvasToMaintainAspectRatio);
-
     // By default Unity keeps WebGL canvas render target size matched with
     // the DOM size of the canvas element (scaled by window.devicePixelRatio)
     // Set this to false if you want to decouple this synchronization from
@@ -87,8 +82,6 @@
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         document.getElementsByTagName('head')[0].appendChild(meta);
-        window.removeEventListener('load', ResizeCanvasToMaintainAspectRatio);
-        window.removeEventListener('resize', ResizeCanvasToMaintainAspectRatio);
         canvas.style.width = "100%";
         canvas.style.height = "100%";
     }
@@ -118,7 +111,11 @@
     }
 
     function ClickSelectFileBtn() {
-        const tempFileLayout = document.getElementById('input');
+        const tempFileLayout = document.getElementById('files');
+
+        tempFileLayout.addEventListener('touchstart', function () {
+            console.log("FileBtn");
+        });
 
         return tempFileLayout.click();
     }
@@ -159,8 +156,8 @@
 
         const newWidth = (9 / 16) * newHeight;
 
-        canvas.style.width = newWidth + 'px';
-        canvas.style.height = newHeight + 'px';
+        canvas.style.width = newWidth   +'px';
+        canvas.style.height = newHeight +'px';
     }
 </script>
 </body>
