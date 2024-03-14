@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="TemplateData/style.css">
 </head>
 <body>
+<input type="file" id="files" style="display: none" accept="image/*" onchange="FileImport()">
 <div id="unity-container">
     <canvas id="unity-canvas" tabindex="-1"></canvas>
     <div id="unity-loading-bar">
@@ -18,7 +19,6 @@
         </div>
     </div>
     <div id="unity-warning"></div>
-    <input type="file" id="files" style="display: none" accept="image/*" onchange="FileImport()">
 </div>
 <script>
 
